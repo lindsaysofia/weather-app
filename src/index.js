@@ -1,0 +1,1 @@
+const OPEN_WEATHER_KEY = config.OPEN_WEATHER_KEY;
