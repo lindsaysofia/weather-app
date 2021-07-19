@@ -1,5 +1,8 @@
+import domLogic from "./domLogic";
+
 const OPEN_WEATHER_KEY = config.OPEN_WEATHER_KEY;
 let data;
+let fahrenheit = true;
 
 async function getWeatherData(location) {
   try {
@@ -14,7 +17,18 @@ async function getWeatherData(location) {
         temp : oneCallData.current.temp,
         feels_like: oneCallData.current.feels_like,
         description: oneCallData.current.weather[0].description,
-      }
+        icon: oneCallData.current.weather[0].icon,
+      },
+      daily: [],
+    };
+
+    for (let day of oneCallData.daily) {
+      data.daily.push({
+        max_temp: day.temp.max,
+        min_temp: day.temp.min,
+        description: day.weather[0].description,
+        icon: day.weather[0].icon,
+      });
     }
 
     console.log(data);
