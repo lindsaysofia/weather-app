@@ -1,4 +1,5 @@
 import domLogic from "./domLogic";
+import './style.css';
 
 const OPEN_WEATHER_KEY = config.OPEN_WEATHER_KEY;
 let data;
@@ -34,18 +35,15 @@ async function getWeatherData(location) {
       });
       i = i + 1;
     }
-
-    console.log(data);
   } catch (err) {
     console.log(err);
   }
 }
 
-getWeatherData('San Diego')
+getWeatherData('London');
 .then(() => {
   domLogic.createWeatherElement(data.current, true);
   domLogic.createInteractiveElements();
   data.daily.forEach(day => domLogic.createWeatherElement(day, false));
-
 });
 

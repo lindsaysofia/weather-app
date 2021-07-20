@@ -1,0 +1,125 @@
+:root {
+  --color-gray: #505050;
+  --color-white: #f2f2f2;
+  --color-orange: #e96e50;
+}
+
+body,
+header,
+h1,
+h2,
+#current,
+#daily,
+.interactive {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--color-gray);
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 10% 30% 60%;
+}
+
+header {
+  background-color: var(--color-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: var(--color-white);
+  text-align: center;
+}
+
+#current {
+  align-self: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.interactive {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1em;
+}
+
+#daily {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather {
+  display: grid;
+  grid-template-areas: "date date"
+  "icon top"
+  "icon bottom"
+  "description description";
+  justify-items: center;
+  margin: 1em;
+}
+
+.date {
+  grid-area: date;
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.top {
+  grid-area: top;
+  align-self: end;
+}
+
+.bottom {
+  grid-area: bottom;
+  align-self: start;
+}
+
+.description {
+  grid-area: description;
+}
+
+.temp::after {
+  content: "\00B0 F";
+}
+
+form,
+.units {
+  margin: 1em;
+}
+
+.search {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.units button {
+  border: 1px solid var(--color-orange);
+}
+
+.units button.active {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: var(--color-gray);
+}
+
+button:hover {
+  cursor: pointer;
+}

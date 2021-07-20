@@ -61,7 +61,7 @@ const domLogic = (() => {
 
     search.classList.add('search');
     search.type = 'text';
-    search.placeholder = 'Seach Location';
+    search.placeholder = 'Search Location';
 
     submit.classList.add('submit');
     submit.type = 'submit'
@@ -70,10 +70,10 @@ const domLogic = (() => {
     units.classList.add('units');
 
     celsius.classList.add('celsius');
-    celsius.innerHTML = '&#176;C';
+    celsius.innerHTML = '&#176; C';
     
-    fahrenheit.classList.add('fahrenheit');
-    fahrenheit.innerHTML = '&#176;F';
+    fahrenheit.classList.add('fahrenheit', 'active');
+    fahrenheit.innerHTML = '&#176; F';
 
     form.appendChild(search);
     form.appendChild(submit);
