@@ -44,5 +44,8 @@ async function getWeatherData(location) {
 getWeatherData('San Diego')
 .then(() => {
   domLogic.createWeatherElement(data.current, true);
+  domLogic.createInteractiveElements();
+  data.daily.forEach(day => domLogic.createWeatherElement(day, false));
+
 });
 

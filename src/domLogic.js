@@ -40,15 +40,56 @@ const domLogic = (() => {
     container.appendChild(bottomTemp);
     container.appendChild(description);
 
-    current.appendChild(container);
+    if (currentWeather) {
+      current.appendChild(container);
+    } else {
+      daily.appendChild(container);
+    }
+    
   };
 
-  const createInteractiveElements = () => {};
+  const createInteractiveElements = () => {
+    const container = document.createElement('div');
+    const form = document.createElement('form');
+    const search = document.createElement('input');
+    const submit = document.createElement('button');
+    const units = document.createElement('div');
+    const celsius = document.createElement('button');
+    const fahrenheit = document.createElement('button');
+
+    container.classList.add('interactive');
+
+    search.classList.add('search');
+    search.type = 'text';
+    search.placeholder = 'Seach Location';
+
+    submit.classList.add('submit');
+    submit.type = 'submit'
+    submit.innerHTML = '<i class="fas fa-search-location"></i>';
+
+    units.classList.add('units');
+
+    celsius.classList.add('celsius');
+    celsius.innerHTML = '&#176;C';
+    
+    fahrenheit.classList.add('fahrenheit');
+    fahrenheit.innerHTML = '&#176;F';
+
+    form.appendChild(search);
+    form.appendChild(submit);
+
+    units.appendChild(celsius);
+    units.appendChild(fahrenheit);
+
+    container.appendChild(form);
+    container.appendChild(units);
+
+    current.appendChild(container);
+  };
 
   return {
     createWeatherElement,
     createInteractiveElements,
-    formatDate,
   };
 })();
 
