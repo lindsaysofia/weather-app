@@ -93,6 +93,10 @@ h1 {
   content: "\00B0 F";
 }
 
+.temp.active::after {
+  content: "\00B0 C";
+}
+
 form,
 .units {
   margin: 1em;

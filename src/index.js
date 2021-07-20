@@ -3,7 +3,7 @@ import './style.css';
 
 const OPEN_WEATHER_KEY = config.OPEN_WEATHER_KEY;
 let data;
-let fahrenheit = true;
+let isFahrenheit = true;
 
 async function getWeatherData(location) {
   try {
@@ -40,10 +40,36 @@ async function getWeatherData(location) {
   }
 }
 
-getWeatherData('London');
+function toggleTemperatureUnits() {
+  const fahrenheit = document.querySelector('.fahrenheit');
+  const celsius = document.querySelector('.celsius');
+  const units = document.querySelectorAll('.temp');
+  units.forEach(unit => {
+    unit.classList.toggle('active');
+    let temp = unit.querySelector('span');
+    if (isFahrenheit) {
+      temp.textContent = ((Number(temp.textContent) - 32) * (5/9)).toFixed(2);
+    } else {
+      temp.textContent = ((Number(temp.textContent) * (9/5)) + 32).toFixed(2);
+    }
+  });
+  fahrenheit.classList.toggle('active');
+  celsius.classList.toggle('active');
+  isFahrenheit = !isFahrenheit;
+}
+
+getWeatherData('London')
 .then(() => {
   domLogic.createWeatherElement(data.current, true);
   domLogic.createInteractiveElements();
   data.daily.forEach(day => domLogic.createWeatherElement(day, false));
+
+  const fahrenheit = document.querySelector('.fahrenheit');
+  const celsius = document.querySelector('.celsius');
+  fahrenheit.addEventListener('click', toggleTemperatureUnits);
+  celsius.addEventListener('click', toggleTemperatureUnits);
+
 });
+
+
 
