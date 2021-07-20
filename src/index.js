@@ -14,6 +14,7 @@ async function getWeatherData(location) {
 
     data = {
       current: {
+        day: 0,
         temp : oneCallData.current.temp,
         feels_like: oneCallData.current.feels_like,
         description: oneCallData.current.weather[0].description,
@@ -21,14 +22,17 @@ async function getWeatherData(location) {
       },
       daily: [],
     };
-
+    
+    let i = 1;
     for (let day of oneCallData.daily) {
       data.daily.push({
+        day: i,
         max_temp: day.temp.max,
         min_temp: day.temp.min,
         description: day.weather[0].description,
         icon: day.weather[0].icon,
       });
+      i = i + 1;
     }
 
     console.log(data);
@@ -37,4 +41,8 @@ async function getWeatherData(location) {
   }
 }
 
-getWeatherData('San Diego');
+getWeatherData('San Diego')
+.then(() => {
+  domLogic.createWeatherElement(data.current, true);
+});
+
