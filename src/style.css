@@ -36,6 +36,10 @@ h1 {
   text-align: center;
 }
 
+.city {
+  text-transform: capitalize;
+}
+
 #current {
   align-self: center;
   position: relative;
@@ -115,6 +119,14 @@ form,
 .units button.active {
   background-color: var(--color-orange);
   color: var(--color-white);
+}
+
+.error {
+  visibility: hidden;
+}
+
+.error.active {
+  visibility: visible;
 }
 
 button {

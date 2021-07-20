@@ -2,6 +2,9 @@ import domLogic from "./domLogic";
 import './style.css';
 
 const OPEN_WEATHER_KEY = config.OPEN_WEATHER_KEY;
+const current = document.querySelector('#current');
+const daily = document.querySelector('#daily');
+const city = document.querySelector('.city');
 let data;
 let isFahrenheit = true;
 
@@ -14,6 +17,7 @@ async function getWeatherData(location) {
     const oneCallData = await oneCallResponse.json();
 
     data = {
+      location,
       current: {
         day: 0,
         temp : oneCallData.current.temp,
@@ -58,18 +62,39 @@ function toggleTemperatureUnits() {
   isFahrenheit = !isFahrenheit;
 }
 
-getWeatherData('London')
-.then(() => {
-  domLogic.createWeatherElement(data.current, true);
-  domLogic.createInteractiveElements();
-  data.daily.forEach(day => domLogic.createWeatherElement(day, false));
+function displayLocation(location) {
+  current.innerHTML = '';
+  daily.innerHTML = '';
+  getWeatherData(location)
+  .then((onFulfilled) => {
+    city.textContent = data.location;
+    domLogic.createWeatherElement(data.current, true);
+    data.daily.forEach(day => domLogic.createWeatherElement(day, false));
 
-  const fahrenheit = document.querySelector('.fahrenheit');
-  const celsius = document.querySelector('.celsius');
-  fahrenheit.addEventListener('click', toggleTemperatureUnits);
-  celsius.addEventListener('click', toggleTemperatureUnits);
+    domLogic.createInteractiveElements();
 
-});
+    const form = document.querySelector('form');
+    const fahrenheit = document.querySelector('.fahrenheit');
+    const celsius = document.querySelector('.celsius');
+        
+    fahrenheit.addEventListener('click', toggleTemperatureUnits);
+    celsius.addEventListener('click', toggleTemperatureUnits);
+    form.addEventListener('submit', handleSearch);
+  }, (onRejected) => {
+    console.log(onRejected);
+  });
+}
+
+function handleSearch(e) {
+  e.preventDefault();
+  let location = e.target[0].value;
+  displayLocation(location);
+
+}
+
+displayLocation('London');
+
+
 
 
 
