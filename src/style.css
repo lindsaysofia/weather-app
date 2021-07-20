@@ -91,6 +91,11 @@ h1 {
 
 .description {
   grid-area: description;
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  justify-self: stretch;
+  text-align: center;
+  padding: .5em;
 }
 
 .temp::after {
